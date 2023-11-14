@@ -2,10 +2,18 @@
 #include "set.h"
 
 int main() {
-    printf("Hello, World!\n");
-    printf("This is wonderful !\n");
-    printf("test\n");
     t_d_cell* c = CreateCell(5, 2);
-    printf("%d %p %p %p\n", c->value, c->next[0], c->next[1], c->next[2]);
+    t_d_list* l = CreateList(4);
+    InsertCell(l, c);
+    DisplayLevel(*l, 0);
+    printf("\n");
+    t_d_cell* c1 = CreateCell(21, 1);
+    InsertSortCell(l, c1);
+    DisplayList(*l);
+    printf("\n");
+    t_d_cell* c2 = CreateCell(12, 3);
+    InsertSortCell(l, c2);
+    DisplayList(*l);
+
     return 0;
 }
