@@ -16,7 +16,7 @@ int main() {
     InsertSortCell(l, c2);
     DisplayList(*l);
 
-    printf("%p", Search(l, 12));
+    printf("%d\n", Search(l, 12)->value);
 
     return 0;
 }

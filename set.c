@@ -85,7 +85,7 @@ void InsertSortCell(t_d_list* list, t_d_cell* cell) {
 
 t_d_cell* ClassicSearch(t_d_list* list, int val, t_d_cell* prev){
     t_d_cell* temp = list->head[*i];
-    while(temp!=NULL && val<=temp->value){
+    while(temp!=NULL && val<=(temp->value)){
         if(temp->value==val){
             *found = 1;
             return temp;
@@ -93,16 +93,16 @@ t_d_cell* ClassicSearch(t_d_list* list, int val, t_d_cell* prev){
         prev = temp;
         temp = temp->next[*i];
     }
+    if(temp==NULL)return temp;
     if(temp->value>val){
         return prev;
     }
-    return NULL;
 }
 
 //
 t_d_cell* Search(t_d_list* list, int val) {
     t_d_cell* prev = list->head[list->MaxLevelHead];
-    *i = list->MaxLevelHead;
+    *i = list->MaxLevelHead-1;
     t_d_cell* pointer = NULL;
     while(*i>=0 && *found==0){
         pointer = ClassicSearch(list, val, prev);
