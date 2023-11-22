@@ -2,6 +2,12 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+//global variable telling us if the value was found
+int a = 0;
+int* found = &a;
+int b = 0;
+int* i = &b;
+
 //create a cell with parameters a value and the number of pointers
 t_d_cell* CreateCell(int val,int MaxLevelPointer){
     t_d_cell *newCell = (t_d_cell*)malloc(sizeof(t_d_cell));
@@ -75,4 +81,35 @@ void InsertSortCell(t_d_list* list, t_d_cell* cell) {
         cell->next[i] = temp;
         prev->next[i] = cell;
     }
+}
+
+t_d_cell* ClassicSearch(t_d_list* list, int val, t_d_cell* prev){
+    t_d_cell* temp = list->head[*i];
+    while(temp!=NULL && val<=temp->value){
+        if(temp->value==val){
+            *found = 1;
+            return temp;
+        }
+        prev = temp;
+        temp = temp->next[*i];
+    }
+    if(temp->value>val){
+        return prev;
+    }
+    return NULL;
+}
+
+//
+t_d_cell* Search(t_d_list* list, int val) {
+    t_d_cell* prev = list->head[list->MaxLevelHead];
+    *i = list->MaxLevelHead;
+    t_d_cell* pointer = NULL;
+    while(*i>=0 && *found==0){
+        pointer = ClassicSearch(list, val, prev);
+        (*i)--;
+    }
+    if(*found==1){
+        return pointer;
+    }
+    return NULL;
 }

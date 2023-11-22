@@ -20,4 +20,7 @@ void DisplayLevel(t_d_list list, int level);
 void DisplayList(t_d_list list);
 void InsertSortCell(t_d_list* list, t_d_cell* cell);
 
+t_d_cell* ClassicSearch(t_d_list* list, int val, t_d_cell* prev);
+t_d_cell* Search(t_d_list* list, int val);
+
 #endif //TEST_SET_H

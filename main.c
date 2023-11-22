@@ -2,6 +2,7 @@
 #include "set.h"
 
 int main() {
+
     t_d_cell* c = CreateCell(5, 2);
     t_d_list* l = CreateList(4);
     InsertCell(l, c);
@@ -14,6 +15,8 @@ int main() {
     t_d_cell* c2 = CreateCell(12, 3);
     InsertSortCell(l, c2);
     DisplayList(*l);
+
+    printf("%p", Search(l, 12));
 
     return 0;
 }
