@@ -10,7 +10,7 @@ int* found = &a;
 int b = 0;
 int* i = &b;
 
-//create a cell with parameters a value and the number of pointers
+//create a cell with as parameters a value "val" and the number of pointers "MaxLevelPointer"
 t_d_cell* CreateCell(int val,int MaxLevelPointer){
     t_d_cell *newCell = (t_d_cell*)malloc(sizeof(t_d_cell));
     newCell->value = val;
@@ -106,6 +106,7 @@ t_d_cell* ClassicSearch(t_d_list* list, int val, t_d_cell* prev){
     if(temp->value>val){
         return prev;
     }
+    return NULL;
 }
 
 //search a given value beginning from the highest level
