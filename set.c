@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+//Part 1
+
 //global variable telling us if the value was found
 int a = 0;
 int* found = &a;
@@ -31,6 +33,7 @@ t_d_list* CreateList(int MaxLevelHead){
     return LevelList;
 }
 
+//if it is possible, we insert a given cell into the list
 void InsertCell(t_d_list* list, t_d_cell* cell) {
     if (cell->MaxLevelNext > list->MaxLevelHead) {
         printf("The cell to be inserted has too many levels!");
@@ -42,6 +45,7 @@ void InsertCell(t_d_list* list, t_d_cell* cell) {
     }
 }
 
+//display all the cell of a list at a level given
 void DisplayLevel(t_d_list list, int level){
     if(level>list.MaxLevelHead){
         printf("This level doesn't exist in the list.");
@@ -56,12 +60,14 @@ void DisplayLevel(t_d_list list, int level){
     printf("NULL\n");
 }
 
+//display all the cell of a list at all levels
 void DisplayList(t_d_list list) {
     for(int i=0; i<list.MaxLevelHead; i++){
         DisplayLevel(list, i);
     }
 }
 
+//if it is possible, we insert a given cell in a list with all values sorted
 void InsertSortCell(t_d_list* list, t_d_cell* cell) {
     if (cell->MaxLevelNext > list->MaxLevelHead) {
         printf("The cell to be inserted has too many levels!");
@@ -83,6 +89,9 @@ void InsertSortCell(t_d_list* list, t_d_cell* cell) {
     }
 }
 
+//Part 2
+
+//search a given value in the level zero from a given list
 t_d_cell* ClassicSearch(t_d_list* list, int val, t_d_cell* prev){
     t_d_cell* temp = list->head[*i];
     while(temp!=NULL && val<=(temp->value)){
@@ -99,7 +108,7 @@ t_d_cell* ClassicSearch(t_d_list* list, int val, t_d_cell* prev){
     }
 }
 
-//
+//search a given value beginning from the highest level
 t_d_cell* Search(t_d_list* list, int val) {
     t_d_cell* prev = list->head[list->MaxLevelHead];
     *i = list->MaxLevelHead-1;
