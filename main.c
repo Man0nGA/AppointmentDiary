@@ -2,15 +2,15 @@
 #include <stdlib.h>
 #include <time.h>
 #include "timer.h"
-#include "set.h"
+#include "rdv.h"
 
 int main() {
 
     //Part 1
 
     //create a cell c and a list l
-    t_d_cell* c = CreateCell(5, 2);
-    t_d_list* l = CreateList(4);
+    t_d_cell_rdv* c = CreateCell(5, 2);
+    t_d_list_rdv* l = CreateList(4);
     //insert a cell in the list l
     InsertCell(l, c);
     //display the list at the level 0
@@ -18,7 +18,7 @@ int main() {
     printf("\n");
 
     //create a cell c1
-    t_d_cell* c1 = CreateCell(21, 1);
+    t_d_cell_rdv* c1 = CreateCell(21, 1);
     //insert the cell c1 in l sorted
     InsertSortCell(l, c1);
     //display the list
@@ -26,7 +26,7 @@ int main() {
     printf("\n");
 
     //create a cell c2
-    t_d_cell* c2 = CreateCell(12, 3);
+    t_d_cell_rdv* c2 = CreateCell(12, 3);
     //insert the cell c2 in l sorted
     InsertSortCell(l, c2);
     //display the list
