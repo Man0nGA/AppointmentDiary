@@ -11,14 +11,14 @@ typedef struct rendezvous //define a structure of meeting
 } rdv;
 
 //Structure of a cell
-typedef struct s_d_cell
+typedef struct s_d_cell_rdv
 {
     rdv value;
-    struct s_d_cell *next;
+    struct s_d_cell_rdv *next;
 } t_d_cell_rdv;
 
 //Structure of a list of cell
-typedef struct s_d_list
+typedef struct s_d_list_rdv
 {
     t_d_cell_rdv *head;
 } t_d_list_rdv;

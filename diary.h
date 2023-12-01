@@ -15,40 +15,25 @@ typedef struct t_diary
     t_d_list_rdv list_rdv;
 }diary;
 
-////////////////////////////////////////////////
-/////////////////////////////////////////To be modify //////////////////
-
-
-typedef struct t_contact //define a structure of contact
-{
-    char** firstname;
-    char** surname;
-} contact;
-
-typedef struct rendezvous //define a structure of meeting
-{
-    int date[3];
-    int time[2];
-    int duration[2];
-    char** purpose;
-} rdv;
-
 //Structure of a cell
-typedef struct s_d_cell
+typedef struct s_d_cell_diary
 {
-    rdv value;
+    diary value;
     int MaxLevelNext;
-    struct s_d_cell **next;
-} t_d_cell_rdv;
+    struct s_d_cell_diary **next;
+} t_d_cell_diary;
 
 //Structure of a list of cell
-typedef struct s_d_list
+typedef struct s_d_list_diary
 {
-    t_d_cell_rdv **head;
+    t_d_cell_diary **head;
     int MaxLevelHead;
-} t_d_list_rdv;
+} t_d_list_diary;
 
 
+////////////////////////////////////////////////
+/////////////////////////////////////////To be modify //////////////////
+/*
 //Part 1
 t_d_cell_rdv* CreateCell(rdv val, int MaxLevelPointer);
 t_d_list_rdv* CreateList(int MaxLevelHead);
@@ -60,6 +45,7 @@ void InsertSortCell(t_d_list_rdv* list, t_d_cell_rdv* cell);
 //Part 2
 t_d_cell_rdv* ClassicSearch(t_d_list_rdv* list, int val, t_d_cell_rdv* prev);
 t_d_cell_rdv* Search(t_d_list_rdv* list, int val);
+ */
 ////////////////////////////////////////////////////////////////////////
 
 
