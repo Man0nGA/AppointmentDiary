@@ -3,7 +3,7 @@
 #include <stdio.h>
 
 //to be modify !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
+/*
 //Part 1
 
 //global variable telling us if the value was found
@@ -126,3 +126,4 @@ t_d_cell_rdv* Search(t_d_list_rdv* list, int val) {
     }
     return NULL;
 }
+ */

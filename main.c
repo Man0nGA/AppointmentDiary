@@ -6,6 +6,13 @@
 
 int main() {
 
+    rdv* new = Create_rdv();
+    t_d_cell_rdv* newcell = CreateCell_rdv(*new);
+    t_d_list_rdv* list =  CreateList_rdv();
+    InsertCell_rdv(list, newcell);
+    Display_rdv(*newcell);
+    Display_all_rdv(*list);
+
     /*
     //Part 1
 

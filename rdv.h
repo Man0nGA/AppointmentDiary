@@ -7,7 +7,7 @@ typedef struct rendezvous //define a structure of meeting
     int date[3];
     int time[2];
     int duration[2];
-    char** purpose; //is it char** or char* that is better ????????????????????????????????????????
+    char* purpose;
 } rdv;
 
 //Structure of a cell
@@ -24,12 +24,12 @@ typedef struct s_d_list_rdv
 } t_d_list_rdv;
 
 
-
-t_d_cell_rdv* CreateCell_rdv(rdv val, int MaxLevelPointer);
-t_d_list_rdv* CreateList_rdv(int MaxLevelHead);
+rdv* Create_rdv();
+t_d_cell_rdv* CreateCell_rdv(rdv val);
+t_d_list_rdv* CreateList_rdv();
 void InsertCell_rdv(t_d_list_rdv* list, t_d_cell_rdv* cell);
-void display_rdv(t_d_cell_rdv cell);
-void display_all_rdv(t_d_list_rdv list);
+void Display_rdv(t_d_cell_rdv cell);
+void Display_all_rdv(t_d_list_rdv list);
 
 /*
 void InsertSortCell_rdv(t_d_list_rdv* list, t_d_cell_rdv* cell);
