@@ -6,6 +6,7 @@
 
 int main() {
 
+    /*
     //Part 1
 
     //create a cell c and a list l
@@ -43,6 +44,6 @@ int main() {
     }
     stopTimer();
     displayTime();
-
+    */
     return 0;
 }

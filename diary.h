@@ -2,6 +2,13 @@
 #define MEGADIARY_DIARY_H
 #include "rdv.h"
 
+
+typedef struct t_contact //define a structure of contact
+{
+    char** firstname;
+    char** surname;
+} contact;
+
 typedef struct t_diary
 {
     contact person;
