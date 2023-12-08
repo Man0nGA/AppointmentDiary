@@ -16,10 +16,13 @@ int main() {
 
     //test of the diary functions
     t_d_cell_diary* d_cell =  CreateCellDiary();
-    Add_rdv_InCellDiary(d_cell,r_cell);
+    Add_rdv_InDiaryCell(d_cell, r_cell);
     t_d_list_diary* d_list = CreateListDiary();
+    //add the cell in the list!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! (InsertSort_DiaryCell())
     Display_DiaryList(*d_list);
-    printf("b");
+
+    //search for a contact in the diary list
+    ContactSearch(d_list, d_cell->value.person);
 
     /*
     //Part 1
@@ -44,7 +47,7 @@ int main() {
     //create a cell c2
     t_d_cell_rdv* c2 = CreateCell(12, 3);
     //insert the cell c2 in l sorted
-    InsertSortCell(l, c2);
+    InsertSort_DiaryCell(l, c2);
     //display the list
     DisplayList(*l);
     printf("\n");

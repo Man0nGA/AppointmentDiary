@@ -14,9 +14,9 @@ contact* CreateContact(){
 }
 
 //create a diary for a given contact
-diary* CreateDiary(contact person){
+diary* CreateDiary(){
     diary* newdiary = (diary*)malloc(sizeof(diary));
-    newdiary->person = person;
+    newdiary->person = *CreateContact();
     newdiary->list_rdv = CreateList_rdv();//initialise list_rdv with an empty list of rdv
     return newdiary;
 }
@@ -24,7 +24,7 @@ diary* CreateDiary(contact person){
 //create a diary cell
 t_d_cell_diary* CreateCellDiary(){
     t_d_cell_diary *newCell = (t_d_cell_diary*)malloc(sizeof(t_d_cell_diary));
-    newCell->value = *CreateDiary(*CreateContact());//initialise the contact contained in the cell
+    newCell->value = *CreateDiary();//initialise the contact contained in the cell
     newCell->MaxLevelNext = 4;
     newCell->next = NULL;
     return newCell;
@@ -41,28 +41,30 @@ t_d_list_diary* CreateListDiary(){
 }
 
 //add a rdv in the diary cell given
-void Add_rdv_InCellDiary(t_d_cell_diary* d, t_d_cell_rdv* r){
-    if(d->value.list_rdv->head ==NULL){ //test if the list of rdv is empty
-        d->value.list_rdv->head = r;
+void Add_rdv_InDiaryCell(t_d_cell_diary* c, t_d_cell_rdv* rdv){
+    if(c->value.list_rdv->head == NULL){ //test if the list of rdv is empty
+        c->value.list_rdv->head = rdv;
     }
     else{
-        t_d_cell_rdv* temp = d->value.list_rdv->head;
+        t_d_cell_rdv* temp = c->value.list_rdv->head;
         while(temp->next!=NULL){
             temp = temp->next; //add the rdv cell at the end of the list
         }
-        temp->next = r;
+        temp->next = rdv;
     }
 }
 
-/*
-//search a given value in the list
-//argument : the list, the value we are looking for
+
+//search a given contact in the list
+//argument : the list, the contact we are looking for
 //we go through the entire list from the highest level to 0 (level 0 = all the cells).
-//We return the cell in which the value has been found
+//We return the cell in which the contact has been found
 t_d_cell_diary * ContactSearch(t_d_list_diary * list, contact c)
 {
-    //get the first char of the contact
+    //to begin with, I test the function only with the first letter of the surname!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
+    //get the first char of the contact
+    int first_c = c.surname[0];
 
     // Get the head of the last level
     int found = 0; //boolean to know if the value has been found
@@ -71,15 +73,15 @@ t_d_cell_diary * ContactSearch(t_d_list_diary * list, contact c)
     t_d_cell_diary * prev = temp;
     while(level >= 0 && found==0)
     {
-        //careful : check if temp != NULL, otherwise, can't compare with val
-        if(temp != NULL && temp->value==val) //if the value of cell temp corresponds to val
+        //careful : check if temp != NULL, otherwise, can't compare with first_c
+        if(temp != NULL && temp->value.person.surname[0]==first_c) //if the value of cell temp corresponds to val
         {
             found = 1;
             break;
         }
         else //if the value is not found, change temp
         {
-            if(temp==NULL || temp->value>val)
+            if(temp==NULL || temp->value.person.surname[0]>first_c)
             {
                 temp = list->head[--level];//go to higher level
             }
@@ -93,16 +95,19 @@ t_d_cell_diary * ContactSearch(t_d_list_diary * list, contact c)
 
     if(found==1)
     {
-        printf("The value %d has been found\n", temp->value);
+        printf("The value %s has been found\n", temp->value.person.surname);
         return temp;
     }
     else
     {
-        printf("The value %d has not been found : (\n", val);
+        printf("The value %s has not been found : (\n", c.surname);
         return NULL;
     }
 }
-*/
+
+//to be modified!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+void Insert_DiaryCell(t_d_list_diary* list, t_d_cell_diary* cell);
+void InsertSort_DiaryCell(t_d_list_diary* list, t_d_cell_diary* cell);
 
 //display all the contacts in the list
 //we can change the display if we want to, this one is not required
@@ -120,7 +125,7 @@ void Display_DiaryList(t_d_list_diary l){
 }
 
 //display the rdv of a given contact
-//void Display_Contact_rdv_FromList(t_d_list_diary l, contact c);
+void Display_Contact_rdv_FromList(t_d_list_diary l, contact c);
 
 
 
@@ -140,7 +145,7 @@ void InsertCell(t_d_list_rdv* list, t_d_cell_rdv* cell) {
 }
 
 //if it is possible (not too many levels), we insert a given cell in a list with all values sorted
-void InsertSortCell(t_d_list_rdv* list, t_d_cell_rdv* cell) {
+void InsertSort_DiaryCell(t_d_list_rdv* list, t_d_cell_rdv* cell) {
     if (cell->MaxLevelNext > list->MaxLevelHead) { //too many levels
         printf("The cell to be inserted has too many levels!");
         return;

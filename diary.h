@@ -5,8 +5,8 @@
 //structure of a contact
 typedef struct t_contact //define a structure of contact
 {
-    char firstname[30];//must create string with definite max size, else allocation problems!!!!!!!!!!!!!!!!!!!!
-    char surname[30];
+    unsigned char firstname[30];//must create string with definite max size, else allocation problems!!!!!!!!!!!!!!!!!!!!
+    unsigned char surname[30];
 } contact;
 
 //structure of a diary
@@ -34,7 +34,7 @@ typedef struct s_d_list_diary
 
 //functions to create variable of a certain structure type
 contact* CreateContact();
-diary* CreateDiary(contact person);
+diary* CreateDiary();
 t_d_cell_diary* CreateCellDiary();
 t_d_list_diary* CreateListDiary();
 
@@ -43,11 +43,12 @@ t_d_cell_diary * ClassicContactSearch(t_d_list_diary* list, contact c);
 t_d_cell_diary * ContactSearch(t_d_list_diary* list, contact c);
 
 //functions to manage rdv
-void Add_rdv_InCellDiary(t_d_cell_diary* c, t_d_cell_rdv* rdv);
-t_d_cell_rdv* Delete_rdv_InCellDiary(t_d_cell_diary* c, t_d_cell_rdv* rdv);
+void Add_rdv_InDiaryCell(t_d_cell_diary* c, t_d_cell_rdv* rdv);
+t_d_cell_rdv* Delete_rdv_InDiaryCell(t_d_cell_diary* c, t_d_cell_rdv* rdv);
 
 //insert a diary cell in the diary list depending on the surname of the contact
-void InsertSortCell(t_d_list_diary* list, t_d_cell_diary* cell);
+void Insert_DiaryCell(t_d_list_diary* list, t_d_cell_diary* cell);
+void InsertSort_DiaryCell(t_d_list_diary* list, t_d_cell_diary* cell);
 
 //display functions
 void Display_DiaryList(t_d_list_diary l);//display all the contacts in the list
