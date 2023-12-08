@@ -4,6 +4,7 @@
 
 
 //create a rendez-vous
+//to modify, entries must be more secure !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 rdv* Create_rdv(){
     rdv* newrdv = (rdv*)malloc(sizeof(rdv));
     newrdv->purpose = (char*)malloc(sizeof(char));
@@ -40,6 +41,7 @@ void InsertCell_rdv(t_d_list_rdv* list, t_d_cell_rdv* cell) {
     list->head = cell;
 }
 
+//display the rdv contained in the cell given as parameter
 void Display_rdv(t_d_cell_rdv cell){
     //calcul of the end time of the appointment
     int hour_end = (cell.value.duration[1]+cell.value.time[1])/60 + cell.value.duration[0]+cell.value.time[0]%24;
@@ -48,6 +50,7 @@ void Display_rdv(t_d_cell_rdv cell){
            cell.value.purpose, cell.value.date[0], cell.value.date[1], cell.value.date[2], cell.value.time[0], cell.value.time[1], hour_end, minute_end);
 }
 
+//display all the rdv of a list of rdv
 void Display_all_rdv(t_d_list_rdv list){
     t_d_cell_rdv* temp = list.head;
     if(temp==NULL){
@@ -63,6 +66,8 @@ void Display_all_rdv(t_d_list_rdv list){
 }
 
 /*
+
+//if necessary modify so that rdv are sorted by date and hour!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 //if it is possible (not too many levels), we insert a given cell in a list with all values sorted
 void InsertSortCell_rdv(t_d_list_rdv* list, t_d_cell_rdv* cell) {

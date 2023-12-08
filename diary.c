@@ -34,24 +34,28 @@ t_d_list_diary* CreateListDiary(int MaxLevelHead){
 
 //add a rdv in the diary cell given
 void Add_rdv_InCellDiary(t_d_cell_diary* d, t_d_cell_rdv* r){
-    if(d->value.list_rdv->head ==NULL){
+    if(d->value.list_rdv->head ==NULL){ //test if the list of rdv is empty
         d->value.list_rdv->head = r;
     }
     else{
         t_d_cell_rdv* temp = d->value.list_rdv->head;
         while(temp->next!=NULL){
-            temp = temp->next;
+            temp = temp->next; //add the rdv cell at the end of the list
         }
         temp->next = r;
     }
 }
 
+/*
 //search a given value in the list
 //argument : the list, the value we are looking for
 //we go through the entire list from the highest level to 0 (level 0 = all the cells).
 //We return the cell in which the value has been found
 t_d_cell_diary * ContactSearch(t_d_list_diary * list, contact c)
 {
+    //get the first char of the contact
+
+
     // Get the head of the last level
     int found = 0; //boolean to know if the value has been found
     int level = (list->MaxLevelHead)-1;
@@ -90,7 +94,7 @@ t_d_cell_diary * ContactSearch(t_d_list_diary * list, contact c)
         return NULL;
     }
 }
-
+*/
 
 //to be modify !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 /*
