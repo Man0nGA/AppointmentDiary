@@ -5,8 +5,8 @@
 //structure of a contact
 typedef struct t_contact //define a structure of contact
 {
-    char* firstname;
-    char* surname;
+    char firstname[30];//must create string with definite max size, else allocation problems!!!!!!!!!!!!!!!!!!!!
+    char surname[30];
 } contact;
 
 //structure of a diary
@@ -35,8 +35,8 @@ typedef struct s_d_list_diary
 //functions to create variable of a certain structure type
 contact* CreateContact();
 diary* CreateDiary(contact person);
-t_d_cell_diary* CreateCellDiary(int MaxLevelNext);
-t_d_list_diary* CreateListDiary(int MaxLevelHead);
+t_d_cell_diary* CreateCellDiary();
+t_d_list_diary* CreateListDiary();
 
 //functions to search for a contact
 t_d_cell_diary * ClassicContactSearch(t_d_list_diary* list, contact c);
@@ -49,11 +49,11 @@ t_d_cell_rdv* Delete_rdv_InCellDiary(t_d_cell_diary* c, t_d_cell_rdv* rdv);
 //insert a diary cell in the diary list depending on the surname of the contact
 void InsertSortCell(t_d_list_diary* list, t_d_cell_diary* cell);
 
-//diplay functions
-void Display_DiaryList(t_d_list_diary * l);//display all the contacts in the list
-void Display_Contact_rdv_FromList(t_d_list_diary * l, contact c);//display the rdv of a given contact
+//display functions
+void Display_DiaryList(t_d_list_diary l);//display all the contacts in the list
+void Display_Contact_rdv_FromList(t_d_list_diary l, contact c);//display the rdv of a given contact
 
 //must add at the end a function to make it more user friendly (like the display Mailinh send on discord)
-
+void UserInterface();
 
 #endif //MEGADIARY_DIARY_H

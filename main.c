@@ -15,8 +15,11 @@ int main() {
     Display_all_rdv(*r_list);
 
     //test of the diary functions
-    t_d_cell_diary* d_cell =  CreateCellDiary(3);
-    t_d_list_diary* d_list = CreateListDiary(3);
+    t_d_cell_diary* d_cell =  CreateCellDiary();
+    printf("%s", d_cell->value.person.surname);
+    Add_rdv_InCellDiary(d_cell,r_cell);
+
+    t_d_list_diary* d_list = CreateListDiary();
 
     /*
     //Part 1
