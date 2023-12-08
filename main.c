@@ -2,16 +2,21 @@
 #include <stdlib.h>
 #include <time.h>
 #include "timer.h"
-#include "rdv.h"
+#include "diary.h"
 
 int main() {
 
-    rdv* new = Create_rdv();
-    t_d_cell_rdv* newcell = CreateCell_rdv(*new);
-    t_d_list_rdv* list =  CreateList_rdv();
-    InsertCell_rdv(list, newcell);
-    Display_rdv(*newcell);
-    Display_all_rdv(*list);
+    //test of the rdv functions
+    //we insert a cell in a list, display the cell then the list
+    t_d_cell_rdv* r_cell = CreateCell_rdv();
+    t_d_list_rdv* r_list =  CreateList_rdv();
+    InsertCell_rdv(r_list, r_cell);
+    Display_rdv(*r_cell);
+    Display_all_rdv(*r_list);
+
+    //test of the diary functions
+    t_d_cell_diary* d_cell =  CreateCellDiary(3);
+    t_d_list_diary* d_list = CreateListDiary(3);
 
     /*
     //Part 1

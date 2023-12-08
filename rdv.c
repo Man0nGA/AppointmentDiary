@@ -16,14 +16,13 @@ rdv* Create_rdv(){
     scanf("%d:%d", &newrdv->duration[0], &newrdv->duration[1]);
     printf("purpose : appointment_purpose\n");
     scanf("%s", newrdv->purpose);
-    printf("%s\n", newrdv->purpose);
     return newrdv;
 }
 
 //create a cell with as parameters rendez-vous "val" and the number of pointers "MaxLevelPointer"
-t_d_cell_rdv* CreateCell_rdv(rdv val){
+t_d_cell_rdv* CreateCell_rdv(){
     t_d_cell_rdv *newCell = (t_d_cell_rdv*)malloc(sizeof(t_d_cell_rdv));
-    newCell->value = val;//on peut mettre Create_rdv ici, si besoin !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    newCell->value = *Create_rdv(); //create a rdv and assign it to the value of the cell
     newCell->next = NULL;
     return newCell;
 }
@@ -65,12 +64,6 @@ void Display_all_rdv(t_d_list_rdv list){
 
 /*
 
-//global variable telling us if the value was found
-int a = 0;
-int* found = &a; //global variable, which save the state of the search in search functions
-int b = 0;
-int* ind = &b; //global variable used in search functions, to save the index of the cells that has already been checked
-
 //if it is possible (not too many levels), we insert a given cell in a list with all values sorted
 void InsertSortCell_rdv(t_d_list_rdv* list, t_d_cell_rdv* cell) {
     if (cell->MaxLevelNext > list->MaxLevelHead) { //too many levels
@@ -93,39 +86,4 @@ void InsertSortCell_rdv(t_d_list_rdv* list, t_d_cell_rdv* cell) {
     }
 }
 
-//Part 2
-
-
-//search a given value in the level zero from a given list
-t_d_cell_rdv* ClassicSearch(t_d_list_rdv* list, int val, t_d_cell_rdv* prev){
-    t_d_cell_rdv* temp = list->head[*ind];
-    while(temp!=NULL && val<=(temp->value)){
-        if(temp->value==val){
-            *found = 1;
-            return temp;
-        }
-        prev = temp;
-        temp = temp->next[*ind];
-    }
-    if(temp==NULL)return temp;
-    if(temp->value>val){
-        return prev;
-    }
-    return NULL;
-}
-
-//search a given value beginning from the highest level
-t_d_cell_rdv* Search(t_d_list_rdv* list, int val) {
-    t_d_cell_rdv* prev = list->head[list->MaxLevelHead];
-    *ind = list->MaxLevelHead-1;
-    t_d_cell_rdv* pointer = NULL;
-    while(*ind>=0 && *found==0){
-        pointer = ClassicSearch(list, val, prev);
-        (*ind)--;
-    }
-    if(*found==1){
-        return pointer;
-    }
-    return NULL;
-}
  */

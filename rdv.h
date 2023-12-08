@@ -25,7 +25,7 @@ typedef struct s_d_list_rdv
 
 
 rdv* Create_rdv();
-t_d_cell_rdv* CreateCell_rdv(rdv val);
+t_d_cell_rdv* CreateCell_rdv();
 t_d_list_rdv* CreateList_rdv();
 void InsertCell_rdv(t_d_list_rdv* list, t_d_cell_rdv* cell);
 void Display_rdv(t_d_cell_rdv cell);
@@ -33,8 +33,6 @@ void Display_all_rdv(t_d_list_rdv list);
 
 /*
 void InsertSortCell_rdv(t_d_list_rdv* list, t_d_cell_rdv* cell);
-
-
 
 t_d_cell_rdv* ClassicSearch(t_d_list_rdv* list, int val, t_d_cell_rdv* prev);
 t_d_cell_rdv* Search(t_d_list_rdv* list, int val);

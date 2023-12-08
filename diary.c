@@ -2,6 +2,96 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+//create a contact
+contact* CreateContact(){
+    contact* newcontact = (contact*)malloc(sizeof(contact));
+    //insérer des scanf pour les firstname et surname????????????????????????????????????????????????
+    return newcontact;
+}
+
+//create a diary for a given contact
+diary* CreateDiary(contact person){
+    diary* newdiary = (diary*)malloc(sizeof(diary));
+    newdiary->person = person;
+    newdiary->list_rdv = NULL;
+    return newdiary;
+}
+
+//create a diary cell
+t_d_cell_diary* CreateCellDiary(int MaxLevelNext){
+    t_d_cell_diary *newCell = (t_d_cell_diary*)malloc(sizeof(t_d_cell_diary));
+    newCell->value = *CreateDiary(*CreateContact());
+    newCell->next = NULL;
+    return newCell;
+}
+
+//create a diary list
+t_d_list_diary* CreateListDiary(int MaxLevelHead){
+    t_d_list_diary *LevelList = (t_d_list_diary*)malloc(sizeof(t_d_list_diary)); //allocate memory for the list that's going to be filled with diaries
+    LevelList->head = NULL; //initialise the list to NULL
+    return LevelList;
+}
+
+//add a rdv in the diary cell given
+void Add_rdv_InCellDiary(t_d_cell_diary* d, t_d_cell_rdv* r){
+    if(d->value.list_rdv->head ==NULL){
+        d->value.list_rdv->head = r;
+    }
+    else{
+        t_d_cell_rdv* temp = d->value.list_rdv->head;
+        while(temp->next!=NULL){
+            temp = temp->next;
+        }
+        temp->next = r;
+    }
+}
+
+//search a given value in the list
+//argument : the list, the value we are looking for
+//we go through the entire list from the highest level to 0 (level 0 = all the cells).
+//We return the cell in which the value has been found
+t_d_cell_diary * ContactSearch(t_d_list_diary * list, contact c)
+{
+    // Get the head of the last level
+    int found = 0; //boolean to know if the value has been found
+    int level = (list->MaxLevelHead)-1;
+    t_d_cell_diary * temp = list->head[level] ;
+    t_d_cell_diary * prev = temp;
+    while(level >= 0 && found==0)
+    {
+        //careful : check if temp != NULL, otherwise, can't compare with val
+        if(temp != NULL && temp->value==val) //if the value of cell temp corresponds to val
+        {
+            found = 1;
+            break;
+        }
+        else //if the value is not found, change temp
+        {
+            if(temp==NULL || temp->value>val)
+            {
+                temp = list->head[--level];//go to higher level
+            }
+            else
+            {
+                temp = temp->next[level];
+
+            }
+        }
+    }
+
+    if(found==1)
+    {
+        printf("The value %d has been found\n", temp->value);
+        return temp;
+    }
+    else
+    {
+        printf("The value %d has not been found : (\n", val);
+        return NULL;
+    }
+}
+
+
 //to be modify !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 /*
 //Part 1
