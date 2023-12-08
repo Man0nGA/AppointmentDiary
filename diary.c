@@ -17,14 +17,14 @@ contact* CreateContact(){
 diary* CreateDiary(contact person){
     diary* newdiary = (diary*)malloc(sizeof(diary));
     newdiary->person = person;
-    newdiary->list_rdv = NULL;
+    newdiary->list_rdv = CreateList_rdv();//initialise list_rdv with an empty list of rdv
     return newdiary;
 }
 
 //create a diary cell
 t_d_cell_diary* CreateCellDiary(){
     t_d_cell_diary *newCell = (t_d_cell_diary*)malloc(sizeof(t_d_cell_diary));
-    newCell->value = *CreateDiary(*CreateContact());
+    newCell->value = *CreateDiary(*CreateContact());//initialise the contact contained in the cell
     newCell->MaxLevelNext = 4;
     newCell->next = NULL;
     return newCell;
@@ -34,7 +34,9 @@ t_d_cell_diary* CreateCellDiary(){
 t_d_list_diary* CreateListDiary(){
     t_d_list_diary *LevelList = (t_d_list_diary*)malloc(sizeof(t_d_list_diary)); //allocate memory for the list that's going to be filled with diaries
     LevelList->MaxLevelHead = 4; //the max level of all the diary lists is four (given in subject paper)
-    LevelList->head = NULL; //initialise the list to NULL
+    for(int i=0; i<LevelList->MaxLevelHead; i++){
+        LevelList->head[i] = NULL; //initialise all the heads of the list to NULL
+    }
     return LevelList;
 }
 
