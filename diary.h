@@ -54,7 +54,7 @@ void InsertSort_DiaryCell(t_d_list_diary* list, t_d_cell_diary* cell);
 void Display_DiaryList(t_d_list_diary l);//display all the contacts in the list
 void Display_Contact_rdv_FromList(t_d_list_diary l, contact c);//display the rdv of a given contact
 
-//must add at the end a function to make it more user friendly (like the display Mailinh send on discord)
-void UserInterface();
+
+
 
 #endif //MEGADIARY_DIARY_H

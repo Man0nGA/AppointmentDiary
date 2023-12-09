@@ -2,10 +2,17 @@
 #include <stdlib.h>
 #include <time.h>
 #include "timer.h"
-#include "diary.h"
+#include "menu.h"
 
 int main() {
+    int a = 1;
+    int* run = &a; // pointer which allows the menu to run or not
 
+    while (*run!=0)
+    {
+        UserInterface(run);
+    }
+    /*
     //test of the rdv functions
     //we insert a cell in a list, display the cell then the list
     t_d_cell_rdv* r_cell = CreateCell_rdv();
@@ -24,7 +31,7 @@ int main() {
     //search for a contact in the diary list
     ContactSearch(d_list, d_cell->value.person);
 
-    /*
+
     //Part 1
 
     //create a cell c and a list l
