@@ -2,16 +2,16 @@
 #include "menu.h"
 
 
-void UserInterface(int* run){
+void UserInterface(int* run, t_d_list_diary* calendar){
     int choice;
     char buffer[256];  // Utilisé pour vider le tampon d'entrée
 
     do {
         printf("\nMenu:\n");
-        printf("1. Search for a contact\n");
-        printf("2. View a contact's appointments\n");
-        printf("3. Create a contact\n");
-        printf("4. Create an appointment for a contact\n");
+        printf("1. Create a contact\n");
+        printf("2. Create an appointment for a contact\n");
+        printf("3. Search for a contact\n");
+        printf("4. View a contact's appointments\n");
         printf("5. Delete an appointment\n");
         printf("6. Save the file of all appointments\n");
         printf("7. Load an appointment file\n");
@@ -28,11 +28,13 @@ void UserInterface(int* run){
         }
 
         switch (choice) {
-            case 1:
-                printf("Hello world !!!");
+            case 1:;
+                t_d_cell_diary* newContact = CreateCellDiary();
+                //don't forget to insert the diary in the list calendar given in argument !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                printf("Contact Created");
                 break;
             case 2:
-                printf("Hello world !!!");
+
                 break;
             case 3:
                 printf("Hello world !!!");
@@ -62,6 +64,7 @@ void UserInterface(int* run){
         }
 
     } while (choice != 0);
+
 
     return;
 }

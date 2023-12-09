@@ -26,7 +26,10 @@ t_d_cell_diary* CreateCellDiary(){
     t_d_cell_diary *newCell = (t_d_cell_diary*)malloc(sizeof(t_d_cell_diary));
     newCell->value = *CreateDiary();//initialise the contact contained in the cell
     newCell->MaxLevelNext = 4;
-    newCell->next = NULL;
+    newCell->next = (t_d_cell_diary**)malloc(sizeof(t_d_cell_diary)*newCell->MaxLevelNext);
+    for(int i=0; i<(newCell->MaxLevelNext)-1; i++) {
+        newCell->next[i] = NULL;
+    }
     return newCell;
 }
 
@@ -34,7 +37,8 @@ t_d_cell_diary* CreateCellDiary(){
 t_d_list_diary* CreateListDiary(){
     t_d_list_diary *LevelList = (t_d_list_diary*)malloc(sizeof(t_d_list_diary)); //allocate memory for the list that's going to be filled with diaries
     LevelList->MaxLevelHead = 4; //the max level of all the diary lists is four (given in subject paper)
-    for(int i=0; i<LevelList->MaxLevelHead; i++){
+    LevelList->head = (t_d_cell_diary **) malloc(sizeof(t_d_cell_diary*)*LevelList->MaxLevelHead);
+    for(int i=0; i<(LevelList->MaxLevelHead)-1; i++){
         LevelList->head[i] = NULL; //initialise all the heads of the list to NULL
     }
     return LevelList;
