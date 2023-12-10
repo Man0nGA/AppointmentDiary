@@ -7,7 +7,8 @@ void UserInterface(int* run, t_d_list_diary* calendar){
     char buffer[256];  // Utilisé pour vider le tampon d'entrée
 
     do {
-        printf("\nMenu:\n");
+        printf("\n");
+        printf("Menu:\n");
         printf("1. Create a contact\n");
         printf("2. Create an appointment for a contact\n");
         printf("3. Search for a contact\n");
@@ -17,6 +18,7 @@ void UserInterface(int* run, t_d_list_diary* calendar){
         printf("7. Load an appointment file\n");
         printf("8. Calculate insertion time for a new contact\n");
         printf("0. Exit\n");
+        printf("\n");
 
         printf("Enter your choice: ");
         // Vérification de l'entrée
@@ -26,18 +28,32 @@ void UserInterface(int* run, t_d_list_diary* calendar){
             // Vider le tampon d'entrée
             scanf("%s", buffer);
         }
+        printf("\n");
 
         switch (choice) {
             case 1:;
                 t_d_cell_diary* newContact = CreateCellDiary();
                 //don't forget to insert the diary in the list calendar given in argument !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 printf("Contact Created");
+                printf("\n");
                 break;
-            case 2:
-
+            case 2:;
+                t_d_cell_diary * cell = ContactSearch(*calendar);
+                if(cell!=NULL) Add_rdv_InDiaryCell(cell);
+                else printf("Can't add any appointment ! This contact doesn't exist ! ");
                 break;
-            case 3:
-                printf("Hello world !!!");
+            case 3:;
+                t_d_cell_diary * found_cell = ContactSearch(*calendar);
+                if(found_cell!=NULL)
+                {
+                    printf("The contact '%s' has been found\n", found_cell->value.person.surname);
+                    printf("\n");
+                }
+                else
+                {
+                    printf("This contact has not been found : (\n");
+                    printf("\n");
+                }
                 break;
             case 4:
                 printf("Hello world !!!");

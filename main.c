@@ -7,31 +7,22 @@
 int main() {
     int a = 1;
     int* run = &a; // pointer which allows the menu to run or not
-    t_d_list_diary* calendar =CreateListDiary(); //represent the list of every diaries
+    t_d_list_diary* calendar = CreateListDiary(); //represent the list of every diaries
+
+    /*
+    //TESTS MANON
+    Display_DiaryList(*calendar);
+    ContactSearch(*calendar);
+    ContactSearch2(*calendar);
+    Display_DiaryList(*calendar);
+    */
+
     while (*run!=0)
     {
         UserInterface(run, calendar);
     }
+
     /*
-    //test of the rdv functions
-    //we insert a cell in a list, display the cell then the list
-    t_d_cell_rdv* r_cell = CreateCell_rdv();
-    t_d_list_rdv* r_list =  CreateList_rdv();
-    InsertCell_rdv(r_list, r_cell);
-    Display_rdv(*r_cell);
-    Display_all_rdv(*r_list);
-
-    //test of the diary functions
-    t_d_cell_diary* d_cell =  CreateCellDiary();
-    Add_rdv_InDiaryCell(d_cell, r_cell);
-    t_d_list_diary* d_list = CreateListDiary();
-    //add the cell in the list!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! (InsertSort_DiaryCell())
-    Display_DiaryList(*d_list);
-
-    //search for a contact in the diary list
-    ContactSearch(d_list, d_cell->value.person);
-
-
     //Part 1
 
     //create a cell c and a list l

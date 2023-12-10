@@ -5,8 +5,8 @@
 //structure of a contact
 typedef struct t_contact //define a structure of contact
 {
-    unsigned char firstname[30];//must create string with definite max size, else allocation problems!!!!!!!!!!!!!!!!!!!!
-    unsigned char surname[30];
+    unsigned char firstname[30];//must create string with definite max size, else allocation problems
+    unsigned char surname[30];//we use unsigned char for conversion to ASCII code
 } contact;
 
 //structure of a diary
@@ -40,10 +40,11 @@ t_d_list_diary* CreateListDiary();
 
 //functions to search for a contact
 t_d_cell_diary * ClassicContactSearch(t_d_list_diary* list, contact c);
-t_d_cell_diary * ContactSearch(t_d_list_diary* list, contact c);
+t_d_cell_diary * ContactSearch(t_d_list_diary list);
+t_d_cell_diary * ContactSearch2(t_d_list_diary list);
 
 //functions to manage rdv
-void Add_rdv_InDiaryCell(t_d_cell_diary* c, t_d_cell_rdv* rdv);
+void Add_rdv_InDiaryCell(t_d_cell_diary* c);
 t_d_cell_rdv* Delete_rdv_InDiaryCell(t_d_cell_diary* c, t_d_cell_rdv* rdv);
 
 //insert a diary cell in the diary list depending on the surname of the contact

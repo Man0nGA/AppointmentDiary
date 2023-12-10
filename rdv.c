@@ -9,14 +9,14 @@ rdv* Create_rdv(){
     rdv* newrdv = (rdv*)malloc(sizeof(rdv));
     newrdv->purpose = (char*)malloc(sizeof(char));
     printf("Enter the information to create an appointment.\n");
-    printf("date : JJ/MM/AAAA\n");//limiter nb jour et mois !!!!!!!!!!!!!!!!!
+    printf("date : JJ/MM/AAAA\n");//limiter nb jour et mois!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     scanf("%d/%d/%d", &newrdv->date[0], &newrdv->date[1], &newrdv->date[2]);
-    printf("time : HOURS:MINUTES\n");//limiter nb minute et heures!!!!!!!!!!!!!!!!!!!!!!!
+    printf("time : HOURS:MINUTES\n");//limiter nb minute et heures!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     scanf("%d:%d", &newrdv->time[0], &newrdv->time[1]);
     printf("duration : HOURS:MINUTES\n");
     scanf("%d:%d", &newrdv->duration[0], &newrdv->duration[1]);
     printf("purpose : appointment_purpose\n");
-    scanf("%s", newrdv->purpose); //faire en sorte qu'il scan aussi les espaces!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    scanf("%s", newrdv->purpose); //faire en sorte qu'il scan aussi les espaces!!!!!!!!!!!!!!!!!!!!!!!!!!
     return newrdv;
 }
 
