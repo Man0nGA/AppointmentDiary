@@ -186,60 +186,68 @@ void Insert_DiaryCell(t_d_list_diary* list, t_d_cell_diary* cell);
 
 void InsertSort_DiaryCell(t_d_list_diary* calendar, t_d_cell_diary* cell)
 {
-    int levelCell = 0; //variable which gives the number of level
+    int levelCell = 3; //variable which gives the number of level
     //how do I get levelCell ??????????????????????????????????????????????????????????
     t_d_cell_diary* prev = calendar->head[0]; //to go through the list and find the right place for cell
     t_d_cell_diary* temp = prev;
     if (calendar->head[0] == NULL) { //if the list is empty at the level 0
         calendar->head[0] = cell;
-        return;
+        levelCell=3;
     }
-    // Compare lastnames of temp and cell to determine the right place
-    while (temp != NULL && strcmp(cell->value.person.surname, temp->value.person.surname) > 0) { //true if the last name (surname) of the person represented
-        // by the cell structure comes alphabetically after the last name of the person represented by the temp structure
-        prev = temp;
-        temp = temp->next[0];
-        //then we found the right place
+    else {
+        // Compare lastnames of temp and cell to determine the right place
+        while (temp != NULL && strcmp(cell->value.person.surname, temp->value.person.surname) >
+                               0) { //true if the last name (surname) of the person represented
+            // by the cell structure comes alphabetically after the last name of the person represented by the temp structure
+            prev = temp;
+            temp = temp->next[0];
+            //then we found the right place
+        }
+        //the cell must be insert after prev and before temp
+        cell->next[0] = temp; //insert the cell for level 0 only
+        prev->next[0] = cell;
+
+        //now i need to find the level
+        if (cell->value.person.surname[0] == prev->value.person.surname[0]) //level 3 : two cells are connected if the first letter of their string is different
+        {
+            printf("hello");
+            levelCell--;
+            cell->MaxLevelNext--;
+            if (cell->value.person.surname[1] == prev->value.person.surname[1]) //level 2 :  the first letter of the cells' strings is the same but the second letter is different.
+            {
+                printf("big");
+                levelCell--;
+                cell->MaxLevelNext--;
+                if(cell->value.person.surname[2] == prev->value.person.surname[2]) //level 1: the first two letters of the cells' strings are the same but the third letter is different.
+                {
+                    printf("wonderful");
+                    levelCell--;
+                    cell->MaxLevelNext--;
+                }
+            }
+
+        }
+
     }
-    //the cell must be insert after prev and before temp
-    cell->next[0] = temp; //insert the cell for level 0 only
-    prev->next[0] = cell;
-    //know i need to find the level
-    if (cell->value.person.surname[0] != temp->value.person.surname[0]) //level 3 : two cells are connected if the first letter of their string is different
-    {
-        levelCell = 3;
-        cell->MaxLevelNext = 4;
-    }
-    else if (cell->value.person.surname[1] != temp->value.person.surname[1]) //level 2 :  the first letter of the cells' strings is the same but the second letter is different.
-    {
-        levelCell = 2;
-        cell->MaxLevelNext = 3;
-    }
-    else if(cell->value.person.surname[2] != temp->value.person.surname[2]) //level 1: the first two letters of the cells' strings are the same but the third letter is different.
-    {
-        levelCell = 1;
-        cell->MaxLevelNext = 2;
-    }
-    else //level 0 : all cells are linked.
-    {
-        levelCell = 1;
-        cell->MaxLevelNext = 0;
-    }
+
     //insertion at other levels
-    for(int i=1; i<levelCell; i++) {
+    for(int i=1; i<=levelCell; i++) {
         if (calendar->head[i] == NULL) { //if the list is empty at the level i
             calendar->head[i] = cell;
-            return;
+
         }
-        temp = calendar->head[i];
-        prev = calendar->head[i];
-        while (temp != NULL &&
-                strcmp(cell->value.person.surname, temp->value.person.surname) > 0) { //search the place to store the value by getting through the list
-            prev = temp;
-            temp = temp->next[i];
+        else {
+            temp = calendar->head[i];
+            prev = calendar->head[i];
+            while (temp != NULL &&
+                   strcmp(cell->value.person.surname, temp->value.person.surname) >
+                   0) { //search the place to store the value by getting through the list
+                prev = temp;
+                temp = temp->next[i];
+            }
+            cell->next[i] = temp; //insert the cell
+            prev->next[i] = cell;
         }
-        cell->next[i] = temp; //insert the cell
-        prev->next[i] = cell;
     }
 }
 
