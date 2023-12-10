@@ -91,20 +91,7 @@ void Delete_rdv_InDiaryCell(t_d_cell_diary* c){
 }
 
 //search a given value in the level zero from a given list
-t_d_cell_diary * ClassicContactSearch(t_d_list_diary list){
-    //we ask the name to be searched to the contact
-    char surname[30];
-    printf("Enter the first three surname letters of the contact your looking for : \n");
-    scanf("%s", surname);//have to secure input!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-    //transform all the capital letters to lowercase one
-    int i=0;
-    while(surname[i]!='\0'){
-        if(surname[i]<=90 && surname[i]>=65){
-            surname[i] += 32;
-        }
-        i++;
-    }
+t_d_cell_diary * ClassicContactSearch(t_d_list_diary list, char surname[30]){
 
     // Get the head of the level zero
     int level = 0;

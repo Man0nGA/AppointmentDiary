@@ -1,6 +1,71 @@
 #include <stdio.h>
 #include "menu.h"
+#include "timer.h"
 
+//calcul the complexity of our insert functions
+void CalculInsert(t_d_list_diary * calendar){
+    printf("Time for a inserting only at the level 0.\n");
+    startTimer();
+    FILE * f_name = fopen("files-names/noms2008nat_txt.txt", "r");
+    if(f_name == NULL) printf("Can't open the file. File doesn't exist.\n");
+    char name[30];
+    while(fgets(name, 30, f_name)){
+        Insert_DiaryCell(calendar, CreateCellDiary());
+    }
+    fclose(f_name);
+    stopTimer();
+    displayTime();
+
+    printf("Time for a inserting at all levels.\n");
+    startTimer();
+    FILE * f_name2 = fopen("files-names/noms2008nat_txt.txt", "r");
+    if(f_name == NULL) printf("Can't open the file. File doesn't exist.\n");
+    char name2[30];
+    while(fgets(name2, 30, f_name2)){
+        Insert_DiaryCell(calendar, CreateCellDiary());
+    }
+    fclose(f_name);
+    stopTimer();
+    displayTime();
+}
+
+//calcul the complexity of our search functions
+void CalculSearch(t_d_list_diary *calendar){
+    printf("Time for a inserting only at the level 0.\n");
+    startTimer();
+    FILE * f_name = fopen("files-names/noms2008nat_txt.txt", "r");
+    if(f_name == NULL) printf("Can't open the file. File doesn't exist.\n");
+    char name[30];
+    while(fgets(name, 30, f_name)){
+
+        //transform all the capital letters to lowercase one
+        int i=0;
+        while(name[i]!='\0'){
+            if(name[i]<=90 && name[i]>=65){
+                name[i] += 32;
+            }
+            i++;
+        }
+
+        ClassicContactSearch(*calendar, name);
+    }
+    fclose(f_name);
+    stopTimer();
+    displayTime();
+
+    //sorry from here this part of the function doesn't work :/
+    printf("Time for a inserting at all levels.\n");
+    startTimer();
+    FILE * f_name2 = fopen("files-names/noms2008nat_txt.txt", "r");
+    if(f_name == NULL) printf("Can't open the file. File doesn't exist.\n");
+    char name2[30];
+    while(fgets(name2, 30, f_name2)){
+        ContactSearch(*calendar);
+    }
+    fclose(f_name);
+    stopTimer();
+    displayTime();
+}
 
 void UserInterface(int* run, t_d_list_diary* calendar){
     int choice;
@@ -34,7 +99,6 @@ void UserInterface(int* run, t_d_list_diary* calendar){
             case 1:;
                 t_d_cell_diary* newContact = CreateCellDiary();
                 InsertSort_DiaryCell(calendar, newContact);
-                Display_DiaryList(*calendar);
                 printf("Contact Created\n");
                 break;
             case 2:;
@@ -67,24 +131,32 @@ void UserInterface(int* run, t_d_list_diary* calendar){
                 t_d_cell_diary * del_cell = ContactSearch(*calendar);
                 Delete_rdv_InDiaryCell(del_cell);
                 break;
-            case 6:
+            case 6:;
                 Save_rdv(*calendar);
+                printf("Appointments saved\n");
                 break;
-            case 7:
-                printf("Hello world !!!");
+            case 7:;
+                //t_d_list_diary * list = Load_rdv();
+                printf("Couldn't load a file.\n");
                 break;
             case 8:
-                printf("Hello world !!!");
+                printf("Complexity comparison on inserting a cell only at level zero and at all levels.\n");
+                CalculInsert(calendar);
+                printf("\n");
+                printf("Complexity comparison on searching a contact only at level zero and at all levels.\n");
+                CalculSearch(calendar);
                 break;
             case 0:
                 printf("Exiting program. Goodbye!\n");
                 *run = 0;
-                break;
+                return;
             default:
                 printf("Invalid choice. Please try again.\n"); //if the integer entered is not among the possible choices
                 break;
         }
-
+    printf("Press ENTER to continue.");
+    fflush(stdin);
+    getchar();
     } while (choice != 0);
 
     return;

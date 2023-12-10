@@ -4,4 +4,7 @@
 
 void UserInterface(int*, t_d_list_diary*);
 
+void CalculInsert(t_d_list_diary * calendar);
+void CalculSearch(t_d_list_diary * calendar);
+
 #endif //MEGADIARY_MENU_H

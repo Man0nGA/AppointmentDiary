@@ -39,7 +39,7 @@ t_d_cell_diary* CreateCellDiary();
 t_d_list_diary* CreateListDiary();
 
 //functions to search for a contact
-t_d_cell_diary * ClassicContactSearch(t_d_list_diary list);
+t_d_cell_diary * ClassicContactSearch(t_d_list_diary list, char surname[30]);
 t_d_cell_diary * ContactSearch(t_d_list_diary list);
 
 //functions to manage rdv
