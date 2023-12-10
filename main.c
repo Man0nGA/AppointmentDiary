@@ -12,8 +12,10 @@ int main() {
     /*
     //TESTS MANON
     t_d_cell_diary * cell = CreateCellDiary();
-    Add_rdv_InDiaryCell(cell);
-    Delete_rdv_InDiaryCell(cell);
+    Insert_DiaryCell(calendar, cell);
+    t_d_cell_diary * cell1 = CreateCellDiary();
+    Insert_DiaryCell(calendar, cell1);
+    Display_DiaryList(*calendar);
     */
 
     while (*run!=0)

@@ -355,3 +355,37 @@ void Display_DiaryList(t_d_list_diary l){
 void Display_Contact_rdv(t_d_cell_diary c){
     Display_all_rdv(*c.value.list_rdv);
 }
+
+//save all the appointments in a file
+void Save_rdv(t_d_list_diary l){
+    t_d_cell_diary * temp= l.head[0];
+    FILE * save;
+    save = fopen("Appointments_save.txt", "rwx");
+    printf("ccc\n");
+    while(temp!=NULL){
+        printf("aaa\n");
+        fprintf(save, "%s %s\n",temp->value.person.firstname, temp->value.person.surname);
+        t_d_cell_rdv * temp_rdv = temp->value.list_rdv->head;
+
+        if(temp_rdv==NULL){
+            fprintf(save, "No appointment !\n");
+            printf("aaa\n");
+        }
+
+        else {
+            while(temp_rdv!=NULL){
+                //calcul of the end time of the appointment
+                int hour_end = (temp_rdv->value.duration[1]+temp_rdv->value.time[1])/60 + temp_rdv->value.duration[0]+temp_rdv->value.time[0]%24;
+                int minute_end = (temp_rdv->value.duration[1]+temp_rdv->value.time[1])-(temp_rdv->value.duration[1]+temp_rdv->value.time[1])/60;
+                printf("bbb\n");
+                fprintf(save, "%s\n%d %d %d\n%d %d\n%d %d\n",
+                       temp_rdv->value.purpose, temp_rdv->value.date[0], temp_rdv->value.date[1], temp_rdv->value.date[2], temp_rdv->value.time[0], temp_rdv->value.time[1], hour_end, minute_end);
+                temp_rdv = temp_rdv->next;
+                printf("bbb\n");
+            }
+        }
+        fprintf(save, "\n");
+        temp = temp->next[0];
+    }
+    fclose(save);
+}

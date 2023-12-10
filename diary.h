@@ -54,5 +54,8 @@ void InsertSort_DiaryCell(t_d_list_diary* list, t_d_cell_diary* cell);
 void Display_DiaryList(t_d_list_diary l);//display all the contacts in the list
 void Display_Contact_rdv(t_d_cell_diary c);//display the list of rdv of a given contact
 
+//functions to handle files
+void Save_rdv(t_d_list_diary l);
+t_d_list_diary * Load_rdv();
 
 #endif //MEGADIARY_DIARY_H
