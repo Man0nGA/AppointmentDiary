@@ -69,7 +69,7 @@ void CalculSearch(t_d_list_diary *calendar){
 
 void UserInterface(int* run, t_d_list_diary* calendar){
     int choice;
-    char buffer[256];  // Utilisé pour vider le tampon d'entrée
+    char buffer[256];  //Utilise pour vider le tampon d'entrée
 
     do {
         printf("\n");
@@ -86,11 +86,11 @@ void UserInterface(int* run, t_d_list_diary* calendar){
         printf("\n");
 
         printf("Enter your choice: ");
-        // Vérification de l'entrée
+        //Verification of the entry
         while (scanf("%d", &choice) != 1) {
             printf("Invalid input. Please enter a number.\n");
 
-            // Vider le tampon d'entrée
+            //Vide le tampon d'entrée
             scanf("%s", buffer);
         }
         printf("\n");

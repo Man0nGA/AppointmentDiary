@@ -32,8 +32,5 @@ void InsertCell_rdv(t_d_list_rdv* list, t_d_cell_rdv* cell);
 void Display_rdv(t_d_cell_rdv cell);
 void Display_all_rdv(t_d_list_rdv list);
 
-/*
-void InsertSortCell_rdv(t_d_list_rdv* list, t_d_cell_rdv* cell);
- */
 
 #endif //TEST_SET_H

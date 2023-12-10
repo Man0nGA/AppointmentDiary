@@ -142,7 +142,7 @@ t_d_cell_diary * ContactSearch(t_d_list_diary list)
     //we ask the name to be searched to the contact
     char surname[3];
     printf("Enter the first three surname letters of the contact your looking for : \n");
-    scanf("%s", surname);//have to secure input!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    scanf("%s", surname);
 
     //transform all the capital letters to lowercase one
     int i=0;

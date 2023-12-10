@@ -4,19 +4,18 @@
 
 
 //create a rendez-vous
-//to modify, entries must be more secure !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 rdv* Create_rdv(){
     rdv* newrdv = (rdv*)malloc(sizeof(rdv));
     newrdv->purpose = (char*)malloc(sizeof(char));
     printf("Enter the information to create an appointment.\n");
-    printf("date : JJ/MM/AAAA\n");//limiter nb jour et mois!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    printf("date : JJ/MM/AAAA\n");
     scanf("%d/%d/%d", &newrdv->date[0], &newrdv->date[1], &newrdv->date[2]);
-    printf("time : HOURS:MINUTES\n");//limiter nb minute et heures!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    printf("time : HOURS:MINUTES\n");
     scanf("%d:%d", &newrdv->time[0], &newrdv->time[1]);
     printf("duration : HOURS:MINUTES\n");
     scanf("%d:%d", &newrdv->duration[0], &newrdv->duration[1]);
     printf("purpose : appointment_purpose\n");
-    scanf("%s", newrdv->purpose); //faire en sorte qu'il scan aussi les espaces!!!!!!!!!!!!!!!!!!!!!!!!!!
+    scanf("%s", newrdv->purpose);
     return newrdv;
 }
 
@@ -64,31 +63,3 @@ void Display_all_rdv(t_d_list_rdv list){
         }
     }
 }
-
-/*
-
-//if necessary modify so that rdv are sorted by date and hour!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-//if it is possible (not too many levels), we insert a given cell in a list with all values sorted
-void InsertSortCell_rdv(t_d_list_rdv* list, t_d_cell_rdv* cell) {
-    if (cell->MaxLevelNext > list->MaxLevelHead) { //too many levels
-        printf("The cell to be inserted has too many levels!");
-        return;
-    }
-    for(int i=0; i<cell->MaxLevelNext; i++) { //the list is empty
-        if(list->head[i]==NULL){
-            list->head[i] = cell;
-            return;
-        }
-        t_d_cell_rdv *temp = list->head[i];
-        t_d_cell_rdv *prev = list->head[i];
-        while (temp != NULL && temp->value < cell->value) {  //find the place to insert
-            prev = temp;
-            temp = temp->next[i];
-        }
-        cell->next[i] = temp; //insertion
-        prev->next[i] = cell;
-    }
-}
-
- */
