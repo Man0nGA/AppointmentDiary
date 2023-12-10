@@ -67,7 +67,27 @@ void Add_rdv_InDiaryCell(t_d_cell_diary* c){
     InsertCell_rdv(c->value.list_rdv , rdv);
 }
 
-t_d_cell_rdv* Delete_rdv_InDiaryCell(t_d_cell_diary* c, t_d_cell_rdv* rdv);
+void Delete_rdv_InDiaryCell(t_d_cell_diary* c){
+    char * purp = (char*)malloc(sizeof(char));
+    printf("Purpose of the appointment you want to delete : \n");
+    scanf("%s", purp);
+    t_d_cell_rdv* temp = c->value.list_rdv->head;
+    t_d_cell_rdv* prev = temp;
+    while(temp!=NULL){
+        if(!strcmp(temp->value.purpose, purp)){//strcmp() return 0 if the two strings are equal
+            printf("%s", temp->value.purpose);
+            prev->next = temp->next;
+            temp->next = NULL;
+            free(temp->value.purpose);
+            free(temp);
+            free(purp);
+            printf("Appointment deleted.\n");
+            break;
+        }
+        prev = temp;
+        temp = temp->next;
+    }
+}
 
 //search a given value in the level zero from a given list
 t_d_cell_diary * ClassicContactSearch(t_d_list_diary list){
@@ -147,7 +167,7 @@ t_d_cell_diary * ContactSearch2(t_d_list_diary list)
 {
     //we ask the name to be searched to the contact
     char surname[30];
-    printf("What is the surname of the contact your looking for : \n");
+    printf("Surname of the contact your looking for : \n");
     scanf("%s", surname);//have to secure input!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
     //transform all the capital letters to lowercase one

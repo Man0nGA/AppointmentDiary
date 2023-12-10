@@ -45,7 +45,7 @@ t_d_cell_diary * ContactSearch2(t_d_list_diary list);
 
 //functions to manage rdv
 void Add_rdv_InDiaryCell(t_d_cell_diary* c);
-t_d_cell_rdv* Delete_rdv_InDiaryCell(t_d_cell_diary* c, t_d_cell_rdv* rdv);
+void Delete_rdv_InDiaryCell(t_d_cell_diary* c);
 
 //insert a diary cell in the diary list depending on the surname of the contact
 void Insert_DiaryCell(t_d_list_diary* list, t_d_cell_diary* cell);

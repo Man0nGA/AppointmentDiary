@@ -61,8 +61,9 @@ void UserInterface(int* run, t_d_list_diary* calendar){
                 if(cell!=NULL) Display_Contact_rdv(*view_cell);
                 else printf("This contact doesn't exist !\n");
                 break;
-            case 5:
-                printf("Hello world !!!");
+            case 5:;
+                t_d_cell_diary * del_cell = ContactSearch2(*calendar);
+                Delete_rdv_InDiaryCell(del_cell);
                 break;
             case 6:
                 printf("Hello world !!!");
@@ -83,7 +84,6 @@ void UserInterface(int* run, t_d_list_diary* calendar){
         }
 
     } while (choice != 0);
-
 
     return;
 }
