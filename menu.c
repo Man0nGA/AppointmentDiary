@@ -35,6 +35,7 @@ void UserInterface(int* run, t_d_list_diary* calendar){
                 t_d_cell_diary* newContact = CreateCellDiary();
                 //don't forget to insert the diary in the list calendar given in argument !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 printf("Contact Created");
+                InsertSort_DiaryCell(calendar, newContact);
                 printf("\n");
                 break;
             case 2:;
