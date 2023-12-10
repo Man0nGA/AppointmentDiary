@@ -5,8 +5,8 @@
 //structure of a contact
 typedef struct t_contact //define a structure of contact
 {
-    unsigned char firstname[30];//must create string with definite max size, else allocation problems
-    unsigned char surname[30];//we use unsigned char for conversion to ASCII code
+    char firstname[30];//must create string with definite max size, else allocation problems
+    char surname[30];//we use unsigned char for conversion to ASCII code
 } contact;
 
 //structure of a diary
@@ -53,7 +53,7 @@ void InsertSort_DiaryCell(t_d_list_diary* list, t_d_cell_diary* cell);
 
 //display functions
 void Display_DiaryList(t_d_list_diary l);//display all the contacts in the list
-void Display_Contact_rdv_FromList(t_d_list_diary l, contact c);//display the rdv of a given contact
+void Display_Contact_rdv(t_d_cell_diary c);//display the rdv of a given contact
 
 
 

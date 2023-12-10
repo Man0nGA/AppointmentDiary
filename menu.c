@@ -40,7 +40,7 @@ void UserInterface(int* run, t_d_list_diary* calendar){
             case 2:;
                 t_d_cell_diary * cell = ContactSearch(*calendar);
                 if(cell!=NULL) Add_rdv_InDiaryCell(cell);
-                else printf("Can't add any appointment ! This contact doesn't exist ! ");
+                else printf("Can't add any appointment ! This contact doesn't exist !\n");
                 break;
             case 3:;
                 t_d_cell_diary * found_cell = ContactSearch(*calendar);
@@ -55,8 +55,10 @@ void UserInterface(int* run, t_d_list_diary* calendar){
                     printf("\n");
                 }
                 break;
-            case 4:
-                printf("Hello world !!!");
+            case 4:;
+                t_d_cell_diary * view_cell = ContactSearch(*calendar);
+                if(cell!=NULL) Display_Contact_rdv(*view_cell);
+                else printf("This contact doesn't exist !\n");
                 break;
             case 5:
                 printf("Hello world !!!");

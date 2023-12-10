@@ -5,7 +5,7 @@
 //create a contact
 contact* CreateContact(){
     contact* newcontact = (contact*)malloc(sizeof(contact));
-    printf("Enter informations to create a new contact.\n");
+    printf("Enter information to create a new contact.\n");
     printf("firstname : \n");
     scanf("%s", newcontact->firstname);
     printf("surname : \n");
@@ -47,16 +47,7 @@ t_d_list_diary* CreateListDiary(){
 //add a rdv in the diary cell given
 void Add_rdv_InDiaryCell(t_d_cell_diary* c){
     t_d_cell_rdv* rdv = CreateCell_rdv();
-    if(c->value.list_rdv->head == NULL){ //test if the list of rdv is empty
-        c->value.list_rdv->head = rdv;
-    }
-    else{
-        t_d_cell_rdv* temp = c->value.list_rdv->head;
-        while(temp->next!=NULL){
-            temp = temp->next; //add the rdv cell at the end of the list
-        }
-        temp->next = rdv;
-    }
+    InsertCell_rdv(c->value.list_rdv , rdv);
 }
 
 //t_d_cell_rdv* Delete_rdv_InDiaryCell(t_d_cell_diary* c, t_d_cell_rdv* rdv);//to be modified!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -76,7 +67,9 @@ t_d_cell_diary * ClassicContactSearch(t_d_list_diary list){
         if(temp->value.person.surname[0]==surname[0]){
             if(temp->value.person.surname[1]==surname[1]){
                 if(temp->value.person.surname[2]==surname[2]){
-                    return temp; //the value has been found
+                    if(temp->value.person.surname[3]==surname[3]){
+                        return temp; //the value has been found
+                    }
                 }
             }
         }
@@ -96,19 +89,22 @@ t_d_cell_diary * ContactSearch(t_d_list_diary list)
     printf("What is the surname of the contact your looking for : \n");
     scanf("%s", surname);
 
-    //to begin with, I test the function only with the first letter of the surname!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
     // Get the head of the last level
     int found = 0; //boolean to know if the value has been found
     int level = (list.MaxLevelHead)-1;
     t_d_cell_diary * temp = list.head[level] ;
-    t_d_cell_diary * prev = temp;
     while(level >= 0 && found==0)
     {
         //careful : check if temp != NULL, otherwise, can't compare with surname[0]
-        if(temp != NULL && temp->value.person.surname[0]==surname[0]) //if the value of cell temp corresponds to surname[0]
+        if(temp != NULL && temp->value.person.surname[0]==surname[0]) //if the value of the cell temp corresponds to surname[0]
         {
-            found = 1;
+            if(temp->value.person.surname[1]==surname[1]){
+                if(temp->value.person.surname[2]==surname[2]){
+                    if(temp->value.person.surname[3]==surname[3]){
+                        found = 1; //the value has been found
+                    }
+                }
+            }
             break;
         }
         else //if the value is not found, change temp
@@ -137,8 +133,6 @@ t_d_cell_diary * ContactSearch2(t_d_list_diary list)
     printf("What is the surname of the contact your looking for : \n");
     scanf("%s", surname);
 
-    //to begin with, I test the function only with the first letter of the surname!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
     // Get the head of the last level
     int found = 0; //boolean to know if the value has been found
     int level = (list.MaxLevelHead)-1;
@@ -153,7 +147,13 @@ t_d_cell_diary * ContactSearch2(t_d_list_diary list)
     {
         if(temp->value.person.surname[0]==surname[0]) //if the value of cell temp corresponds to surname[0]
         {
-            found = 1;
+            if(temp->value.person.surname[1]==surname[1]){
+                if(temp->value.person.surname[2]==surname[2]){
+                    if(temp->value.person.surname[3]==surname[3]){
+                        found = 1; //the value has been found
+                    }
+                }
+            }
             break;
         }
 
@@ -201,7 +201,9 @@ void Display_DiaryList(t_d_list_diary l){
 }
 
 //display the rdv of a given contact
-void Display_Contact_rdv_FromList(t_d_list_diary l, contact c);
+void Display_Contact_rdv(t_d_cell_diary c){
+    Display_all_rdv(*c.value.list_rdv);
+}
 
 
 

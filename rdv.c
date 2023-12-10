@@ -35,7 +35,7 @@ t_d_list_rdv* CreateList_rdv(){
     return LevelList;
 }
 
-//if it is possible, we insert a given cell into the list at the HEAD
+//we insert a given cell into the list at the HEAD
 void InsertCell_rdv(t_d_list_rdv* list, t_d_cell_rdv* cell) {
     cell->next = list->head;
     list->head = cell;
