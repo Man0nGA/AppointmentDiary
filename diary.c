@@ -11,6 +11,22 @@ contact* CreateContact(){
     scanf("%s", newcontact->firstname);
     printf("surname : \n");
     scanf("%s", newcontact->surname);
+
+    //transform all the capital letters to lowercase ones
+    int i = 0;
+    while(newcontact->firstname[i]!='\0'){
+        if (newcontact->firstname[i] <= 90 && newcontact->firstname[i] >= 65) {
+            newcontact->firstname[i] += 32;
+        }
+        i++;
+    }
+    i = 0;
+    while(newcontact->surname[i]!='\0'){
+        if (newcontact->surname[i] <= 90 && newcontact->surname[i] >= 65) {
+            newcontact->surname[i] += 32;
+        }
+        i++;
+    }
     return newcontact;
 }
 
@@ -51,34 +67,39 @@ void Add_rdv_InDiaryCell(t_d_cell_diary* c){
     InsertCell_rdv(c->value.list_rdv , rdv);
 }
 
-//t_d_cell_rdv* Delete_rdv_InDiaryCell(t_d_cell_diary* c, t_d_cell_rdv* rdv);//to be modified!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+t_d_cell_rdv* Delete_rdv_InDiaryCell(t_d_cell_diary* c, t_d_cell_rdv* rdv);
 
 //search a given value in the level zero from a given list
 t_d_cell_diary * ClassicContactSearch(t_d_list_diary list){
     //we ask the name to be searched to the contact
     char surname[30];
-    printf("What is the surname of the contact your looking for : \n");
-    scanf("%s", surname);
+    printf("Surname of the contact your looking for : \n");
+    scanf("%s", surname);//have to secure input!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+    //transform all the capital letters to lowercase one
+    int i=0;
+    while(surname[i]!='\0'){
+        if(surname[i]<=90 && surname[i]>=65){
+            surname[i] += 32;
+        }
+        i++;
+    }
 
     // Get the head of the level zero
     int level = 0;
     t_d_cell_diary * temp = list.head[level] ;
 
     while(temp!=NULL && surname[0]<=(temp->value.person.surname[0])){
-        if(temp->value.person.surname[0]==surname[0]){
-            if(temp->value.person.surname[1]==surname[1]){
-                if(temp->value.person.surname[2]==surname[2]){
-                    if(temp->value.person.surname[3]==surname[3]){
-                        return temp; //the value has been found
-                    }
-                }
-            }
+        if(temp->value.person.surname[0]==surname[0] && temp->value.person.surname[1]==surname[1]
+        && temp->value.person.surname[2]==surname[2]){
+            return temp; //the value has been found
         }
         temp = temp->next[level];
     }
     return NULL;
 }
 
+/*
 //search a given contact in the list
 //argument : the list, the contact we are looking for
 //we go through the entire list from the highest level to 0 (level 0 = all the cells).
@@ -86,9 +107,9 @@ t_d_cell_diary * ClassicContactSearch(t_d_list_diary list){
 t_d_cell_diary * ContactSearch(t_d_list_diary list)
 {
     //we ask the name to be searched to the contact
-    char surname[30];
-    printf("What is the surname of the contact your looking for : \n");
-    scanf("%s", surname);
+    char surname[60];
+    printf("What is the name of the contact your looking for : \n");
+    scanf("%s", surname);//have to secure input!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
     // Get the head of the last level
     int found = 0; //boolean to know if the value has been found
@@ -97,20 +118,14 @@ t_d_cell_diary * ContactSearch(t_d_list_diary list)
     while(level >= 0 && found==0)
     {
         //careful : check if temp != NULL, otherwise, can't compare with surname[0]
-        if(temp != NULL && temp->value.person.surname[0]==surname[0]) //if the value of the cell temp corresponds to surname[0]
-        {
-            if(temp->value.person.surname[1]==surname[1]){
-                if(temp->value.person.surname[2]==surname[2]){
-                    if(temp->value.person.surname[3]==surname[3]){
-                        found = 1; //the value has been found
-                    }
-                }
-            }
+        if(temp->value.person.name[0]==surname[0] && temp->value.person.name[1]==surname[1]
+           && temp->value.person.name[2]==surname[2]){
+            found = 1; //the value has been found
             break;
         }
         else //if the value is not found, change temp
         {
-            if(temp==NULL || temp->value.person.surname[0]>surname[0])
+            if(temp==NULL || temp->value.person.name[0]>surname[0])
             {
                 temp = list.head[--level];//go to higher level
             }
@@ -121,24 +136,33 @@ t_d_cell_diary * ContactSearch(t_d_list_diary list)
             }
         }
     }
-
+    printf("out of while\n");
     if(found==1) return temp;
 
     else return NULL;
 }
+*/
 
 t_d_cell_diary * ContactSearch2(t_d_list_diary list)
 {
     //we ask the name to be searched to the contact
     char surname[30];
     printf("What is the surname of the contact your looking for : \n");
-    scanf("%s", surname);
+    scanf("%s", surname);//have to secure input!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+    //transform all the capital letters to lowercase one
+    int i=0;
+    while(surname[i]!='\0'){
+        if(surname[i]<=90 && surname[i]>=65){
+            surname[i] += 32;
+        }
+        i++;
+    }
 
     // Get the head of the last level
     int found = 0; //boolean to know if the value has been found
     int level = (list.MaxLevelHead)-1;
     t_d_cell_diary * temp = list.head[level] ;
-    //t_d_cell_diary * prev = temp;
 
     while(level>=0 && (temp==NULL || temp->value.person.surname[0]>surname[0])){//decrease the list until the head isn't NULL and smaller or equal to surname[0]
         level--;
@@ -146,18 +170,11 @@ t_d_cell_diary * ContactSearch2(t_d_list_diary list)
     }
     while(level >= 0 && found==0)
     {
-        if(temp->value.person.surname[0]==surname[0]) //if the value of cell temp corresponds to surname[0]
-        {
-            if(temp->value.person.surname[1]==surname[1]){
-                if(temp->value.person.surname[2]==surname[2]){
-                    if(temp->value.person.surname[3]==surname[3]){
-                        found = 1; //the value has been found
-                    }
-                }
-            }
+        if(temp->value.person.surname[0]==surname[0] && temp->value.person.surname[1]==surname[1]
+           && temp->value.person.surname[2]==surname[2]){
+            found = 1; //the value has been found
             break;
         }
-
         else //if the value is not found
         {
             if(temp->next[level]==NULL) level--;//decrease level if we are at the end of the list
@@ -265,43 +282,3 @@ void Display_DiaryList(t_d_list_diary l){
 void Display_Contact_rdv(t_d_cell_diary c){
     Display_all_rdv(*c.value.list_rdv);
 }
-
-
-
-//to be modify !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-/*
-
-//if it is possible, we insert a given cell into the list at the HEAD
-void InsertCell(t_d_list_rdv* list, t_d_cell_rdv* cell) {
-    if (cell->MaxLevelNext > list->MaxLevelHead) {
-        printf("The cell to be inserted has too many levels!");
-        return;
-    }
-    for(int i=0; i<cell->MaxLevelNext; i++) { //using a loop, then, every heads points toward the cell
-        cell->next[i] = list->head[i];
-        list->head[i] = cell;
-    }
-}
-
-//if it is possible (not too many levels), we insert a given cell in a list with all values sorted
-void InsertSort_DiaryCell(t_d_list_rdv* list, t_d_cell_rdv* cell) {
-    if (cell->MaxLevelNext > list->MaxLevelHead) { //too many levels
-        printf("The cell to be inserted has too many levels!");
-        return;
-    }
-    for(int i=0; i<cell->MaxLevelNext; i++) { //the list is empty
-        if(list->head[i]==NULL){
-            list->head[i] = cell;
-            return;
-        }
-        t_d_cell_rdv *temp = list->head[i];
-        t_d_cell_rdv *prev = list->head[i];
-        while (temp != NULL && temp->value < cell->value) {  //find the place to insert
-            prev = temp;
-            temp = temp->next[i];
-        }
-        cell->next[i] = temp; //insertion
-        prev->next[i] = cell;
-    }
-}
-*/

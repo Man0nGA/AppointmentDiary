@@ -33,18 +33,17 @@ void UserInterface(int* run, t_d_list_diary* calendar){
         switch (choice) {
             case 1:;
                 t_d_cell_diary* newContact = CreateCellDiary();
-                //don't forget to insert the diary in the list calendar given in argument !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 printf("Contact Created");
                 InsertSort_DiaryCell(calendar, newContact);
                 printf("\n");
                 break;
             case 2:;
-                t_d_cell_diary * cell = ContactSearch(*calendar);
+                t_d_cell_diary * cell = ContactSearch2(*calendar);
                 if(cell!=NULL) Add_rdv_InDiaryCell(cell);
                 else printf("Can't add any appointment ! This contact doesn't exist !\n");
                 break;
             case 3:;
-                t_d_cell_diary * found_cell = ContactSearch(*calendar);
+                t_d_cell_diary * found_cell = ContactSearch2(*calendar);
                 if(found_cell!=NULL)
                 {
                     printf("The contact '%s' has been found\n", found_cell->value.person.surname);
@@ -57,7 +56,7 @@ void UserInterface(int* run, t_d_list_diary* calendar){
                 }
                 break;
             case 4:;
-                t_d_cell_diary * view_cell = ContactSearch(*calendar);
+                t_d_cell_diary * view_cell = ContactSearch2(*calendar);
                 if(cell!=NULL) Display_Contact_rdv(*view_cell);
                 else printf("This contact doesn't exist !\n");
                 break;

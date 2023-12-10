@@ -9,13 +9,12 @@ int main() {
     int* run = &a; // pointer which allows the menu to run or not
     t_d_list_diary* calendar = CreateListDiary(); //represent the list of every diaries
 
-    /*
     //TESTS MANON
     Display_DiaryList(*calendar);
-    ContactSearch(*calendar);
-    ContactSearch2(*calendar);
+    printf("%p\n", ClassicContactSearch(*calendar));
+    //ContactSearch(*calendar);//doesn't work for the moment
+    printf("%p\n", ContactSearch2(*calendar));
     Display_DiaryList(*calendar);
-    */
 
     while (*run!=0)
     {
