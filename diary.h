@@ -39,7 +39,7 @@ t_d_cell_diary* CreateCellDiary();
 t_d_list_diary* CreateListDiary();
 
 //functions to search for a contact
-t_d_cell_diary * ClassicContactSearch(t_d_list_diary* list, contact c);
+t_d_cell_diary * ClassicContactSearch(t_d_list_diary list);
 t_d_cell_diary * ContactSearch(t_d_list_diary list);
 t_d_cell_diary * ContactSearch2(t_d_list_diary list);
 

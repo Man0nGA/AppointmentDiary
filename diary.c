@@ -59,54 +59,10 @@ void Add_rdv_InDiaryCell(t_d_cell_diary* c){
     }
 }
 
+//t_d_cell_rdv* Delete_rdv_InDiaryCell(t_d_cell_diary* c, t_d_cell_rdv* rdv);//to be modified!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-//search a given contact in the list
-//argument : the list, the contact we are looking for
-//we go through the entire list from the highest level to 0 (level 0 = all the cells).
-//We return the cell in which the contact has been found
-t_d_cell_diary * ContactSearch(t_d_list_diary list)
-{
-    //we ask the name to be searched to the contact
-    char surname[30];
-    printf("What is the surname of the contact your looking for : \n");
-    scanf("%s", surname);
-
-    //to begin with, I test the function only with the first letter of the surname!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-    // Get the head of the last level
-    int found = 0; //boolean to know if the value has been found
-    int level = (list.MaxLevelHead)-1;
-    t_d_cell_diary * temp = list.head[level] ;
-    t_d_cell_diary * prev = temp;
-    while(level >= 0 && found==0)
-    {
-        //careful : check if temp != NULL, otherwise, can't compare with first_c
-        if(temp != NULL && temp->value.person.surname[0]==surname[0]) //if the value of cell temp corresponds to val
-        {
-            found = 1;
-            break;
-        }
-        else //if the value is not found, change temp
-        {
-            if(temp==NULL || temp->value.person.surname[0]>surname[0])
-            {
-                temp = list.head[--level];//go to higher level
-            }
-            else
-            {
-                temp = temp->next[level];
-
-            }
-        }
-    }
-
-    if(found==1) return temp;
-
-    else return NULL;
-}
-
-t_d_cell_diary * ContactSearch2(t_d_list_diary list)
-{
+/*
+t_d_cell_diary * ClassicContactSearch(t_d_list_diary list){
     //we ask the name to be searched to the contact
     char surname[30];
     printf("What is the surname of the contact your looking for : \n");
@@ -157,6 +113,102 @@ t_d_cell_diary * ContactSearch2(t_d_list_diary list)
     {
         printf("The value %s has not been found : (\n", surname);
         printf("\n");
+        return NULL;
+    }
+}
+*/
+
+//search a given contact in the list
+//argument : the list, the contact we are looking for
+//we go through the entire list from the highest level to 0 (level 0 = all the cells).
+//We return the cell in which the contact has been found
+t_d_cell_diary * ContactSearch(t_d_list_diary list)
+{
+    //we ask the name to be searched to the contact
+    char surname[30];
+    printf("What is the surname of the contact your looking for : \n");
+    scanf("%s", surname);
+
+    //to begin with, I test the function only with the first letter of the surname!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+    // Get the head of the last level
+    int found = 0; //boolean to know if the value has been found
+    int level = (list.MaxLevelHead)-1;
+    t_d_cell_diary * temp = list.head[level] ;
+    t_d_cell_diary * prev = temp;
+    while(level >= 0 && found==0)
+    {
+        //careful : check if temp != NULL, otherwise, can't compare with surname[0]
+        if(temp != NULL && temp->value.person.surname[0]==surname[0]) //if the value of cell temp corresponds to surname[0]
+        {
+            found = 1;
+            break;
+        }
+        else //if the value is not found, change temp
+        {
+            if(temp==NULL || temp->value.person.surname[0]>surname[0])
+            {
+                temp = list.head[--level];//go to higher level
+            }
+            else
+            {
+                temp = temp->next[level];
+
+            }
+        }
+    }
+
+    if(found==1) return temp;
+
+    else return NULL;
+}
+
+t_d_cell_diary * ContactSearch2(t_d_list_diary list)
+{
+    //we ask the name to be searched to the contact
+    char surname[30];
+    printf("What is the surname of the contact your looking for : \n");
+    scanf("%s", surname);
+
+    //to begin with, I test the function only with the first letter of the surname!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+    // Get the head of the last level
+    int found = 0; //boolean to know if the value has been found
+    int level = (list.MaxLevelHead)-1;
+    t_d_cell_diary * temp = list.head[level] ;
+    //t_d_cell_diary * prev = temp;
+
+    while(level>=0 && (temp==NULL || temp->value.person.surname[0]>surname[0])){//decrease the list until the head isn't NULL and smaller or equal to surname[0]
+        level--;
+        temp = list.head[level];
+    }
+    while(level >= 0 && found==0)
+    {
+        if(temp->value.person.surname[0]==surname[0]) //if the value of cell temp corresponds to surname[0]
+        {
+            found = 1;
+            break;
+        }
+
+        else //if the value is not found
+        {
+            if(temp->next[level]==NULL) level--;//decrease level if we are at the end of the list
+            else
+            {
+                if(temp->next[level]->value.person.surname[0]<surname[0]){
+                    temp = temp->next[level];//go through the list if temp contain a smaller surname[0] than the one we are searching for
+                }
+                else level--;
+            }
+        }
+    }
+
+    if(found==1)
+    {
+        return temp;
+    }
+    else
+    {
         return NULL;
     }
 }
