@@ -61,62 +61,29 @@ void Add_rdv_InDiaryCell(t_d_cell_diary* c){
 
 //t_d_cell_rdv* Delete_rdv_InDiaryCell(t_d_cell_diary* c, t_d_cell_rdv* rdv);//to be modified!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-/*
+//search a given value in the level zero from a given list
 t_d_cell_diary * ClassicContactSearch(t_d_list_diary list){
     //we ask the name to be searched to the contact
     char surname[30];
     printf("What is the surname of the contact your looking for : \n");
     scanf("%s", surname);
 
-    //to begin with, I test the function only with the first letter of the surname!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-    int c = surname[0];
-    // Get the head of the last level
-    int found = 0; //boolean to know if the value has been found
-    int level = (list.MaxLevelHead)-1;
+    // Get the head of the level zero
+    int level = 0;
     t_d_cell_diary * temp = list.head[level] ;
-    //t_d_cell_diary * prev = temp;
 
-    while(level>=0 && (temp==NULL || temp->value.person.surname[0]>c)){
-        level--;
-        temp = list.head[level];
-    }
-    while(level >= 0 && found==0)
-    {
-        //careful : check if temp != NULL, otherwise, can't compare with first_c
-        if(temp->value.person.surname[0]==surname[0]) //if the value of cell temp corresponds to val
-        {
-            found = 1;
-            break;
-        }
-
-        else //if the value is not found, change temp
-        {
-            if(temp->next[level]==NULL) level--;
-            else
-            {
-                if(temp->next[level]->value.person.surname[0]<surname[0]){
-                    temp = temp->next[level];
+    while(temp!=NULL && surname[0]<=(temp->value.person.surname[0])){
+        if(temp->value.person.surname[0]==surname[0]){
+            if(temp->value.person.surname[1]==surname[1]){
+                if(temp->value.person.surname[2]==surname[2]){
+                    return temp; //the value has been found
                 }
-                else level--;
             }
         }
+        temp = temp->next[level];
     }
-
-    if(found==1)
-    {
-        printf("The value %s has been found\n", temp->value.person.surname);
-        printf("\n");
-        return temp;
-    }
-    else
-    {
-        printf("The value %s has not been found : (\n", surname);
-        printf("\n");
-        return NULL;
-    }
+    return NULL;
 }
-*/
 
 //search a given contact in the list
 //argument : the list, the contact we are looking for
